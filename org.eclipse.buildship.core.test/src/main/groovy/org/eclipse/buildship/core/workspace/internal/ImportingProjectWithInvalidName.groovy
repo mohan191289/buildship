@@ -13,7 +13,6 @@ package org.eclipse.buildship.core.workspace.internal
 
 import spock.lang.Issue
 
-import org.eclipse.buildship.core.Logger
 import org.eclipse.buildship.core.notification.UserNotification
 import org.eclipse.buildship.core.test.fixtures.ProjectSynchronizationSpecification
 
