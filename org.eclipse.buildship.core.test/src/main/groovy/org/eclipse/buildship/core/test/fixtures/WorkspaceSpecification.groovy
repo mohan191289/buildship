@@ -48,6 +48,7 @@ abstract class WorkspaceSpecification extends Specification {
 
     void cleanup() {
         deleteAllProjects(true)
+        environment.close()
     }
 
     protected void deleteAllProjects(boolean includingContent) {
