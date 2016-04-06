@@ -186,6 +186,8 @@ public interface WorkspaceOperations {
      * In general, Eclipse projects can have a name that is different from their folder name.
      * However, projects that are directly contained in the workspace root directory (also known as
      * the 'default location') must have the same name as their directory.
+     * <p/>
+     * All characters are removed from the project name that are illegal on the current OS.
      *
      * @param desiredName the desired project name
      * @param location the location of the project

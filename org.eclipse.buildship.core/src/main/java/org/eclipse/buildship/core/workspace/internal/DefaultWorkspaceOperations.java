@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.CharMatcher;
 import com.google.common.base.Optional;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
@@ -259,10 +260,15 @@ public final class DefaultWorkspaceOperations implements WorkspaceOperations {
     }
 
     @Override
+    @SuppressWarnings("restriction")
     public String normalizeProjectName(String desiredName, File location) {
         Preconditions.checkNotNull(desiredName);
         Preconditions.checkNotNull(location);
-        return isDirectChildOfWorkspaceRootFolder(location) ? location.getName() : desiredName;
+        if (isDirectChildOfWorkspaceRootFolder(location)) {
+            return location.getName();
+        } else {
+            return CharMatcher.anyOf(new String(org.eclipse.core.internal.resources.OS.INVALID_RESOURCE_CHARACTERS)).replaceFrom(desiredName, '_');
+        }
     }
 
     /*

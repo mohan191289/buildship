@@ -451,6 +451,15 @@ class WorkspaceOperationsTest extends WorkspaceSpecification {
         thrown NullPointerException
     }
 
+    def "Illegal characters in the project name are replaced with a '_' character" () {
+        expect:
+        workspaceOperations.normalizeProjectName(originalName, dir("bar")) == normalizedName
+
+        where:
+        originalName << org.eclipse.core.internal.resources.OS.INVALID_RESOURCE_CHARACTERS.collect { "${it}project${it}" }
+        normalizedName << ['_project_'] * org.eclipse.core.internal.resources.OS.INVALID_RESOURCE_CHARACTERS.size()
+    }
+
     def "Can rename a project"() {
         setup:
         IProject sampleProject = createSampleProject()
