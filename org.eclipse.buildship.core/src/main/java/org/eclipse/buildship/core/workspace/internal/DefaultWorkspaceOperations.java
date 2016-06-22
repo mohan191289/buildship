@@ -83,6 +83,11 @@ public final class DefaultWorkspaceOperations implements WorkspaceOperations {
     }
 
     @Override
+    public Optional<IProject> findProject(Predicate<? super IProject> condition) {
+        return FluentIterable.from(getAllProjects()).firstMatch(condition);
+    }
+
+    @Override
     public Optional<IProjectDescription> findProjectDescriptor(File location, IProgressMonitor monitor) {
         IPath descriptorLocation = Path.fromOSString(location.getPath()).append(".project");
         IWorkspace workspace = ResourcesPlugin.getWorkspace();

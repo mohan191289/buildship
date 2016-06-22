@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
 import com.google.common.collect.ImmutableList;
 
 import org.eclipse.core.resources.IFolder;
@@ -53,6 +54,8 @@ public interface WorkspaceOperations {
      * @return the matching project, otherwise {@link Optional#absent()}
      */
     Optional<IProject> findProjectByLocation(File location);
+
+    Optional<IProject> findProject(Predicate<? super IProject> condition);
 
     /**
      * Returns the Eclipse project descriptor at the given physical location, if it exists.
